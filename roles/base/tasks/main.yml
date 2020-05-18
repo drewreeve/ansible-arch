@@ -17,3 +17,14 @@
     update_password: on_create
     append: yes
 
+- name: Enable colour in pacman
+  lineinfile:
+    dest: /etc/pacman.conf
+    regexp: '#Color'
+    line: 'Color'
+
+- name: Use multiple jobs to speed up compilation
+  lineinfile:
+    dest: /etc/makepkg.conf
+    regexp: '^#MAKEFLAGS=\".+\"$'
+    line: 'MAKEFLAGS="-j$(nproc)"'
