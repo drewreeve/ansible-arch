@@ -1,0 +1,19 @@
+---
+- name: Install sudo
+  pacman: name=sudo state=present
+
+- name: Enable wheel group
+  lineinfile:
+    path: /etc/sudoers.d/01-enable-wheel
+    line: '%wheel ALL=(ALL) ALL'
+    create: yes
+    validate: 'visudo -cf %s'
+
+- name: Create new user
+  user:
+    name: "{{ user.name }}"
+    groups: "{{ user.groups }}"
+    password: "{{ user_password|password_hash('sha512') }}"
+    update_password: on_create
+    append: yes
+

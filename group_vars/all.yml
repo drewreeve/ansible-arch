@@ -1,0 +1,5 @@
+user:
+  name: dru
+  groups: wheel
+  shell: /usr/bin/zsh
+  email: dru.reeve@gmail.com
