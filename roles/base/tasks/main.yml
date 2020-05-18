@@ -28,3 +28,8 @@
     dest: /etc/makepkg.conf
     regexp: '^#MAKEFLAGS=\".+\"$'
     line: 'MAKEFLAGS="-j$(nproc)"'
+
+- name: Install yay
+  aur:
+    name: yay
+  become_user: "{{ user.name }}"
