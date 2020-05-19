@@ -14,4 +14,6 @@ packages:
     - rsync
     - sudo
     - tmux
-
+  editors:
+    - neovim
+    - vim
