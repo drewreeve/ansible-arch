@@ -1,0 +1,5 @@
+---
+- name: Install fonts
+  pacman:
+    name: "{{ packages.fonts }}"
+    state: present

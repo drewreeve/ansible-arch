@@ -4,6 +4,7 @@
   roles:
     - { role: base, tags: ['base'] }
     - { role: editors }
+    - { role: fonts }
     - { role: microcode }
     - { role: x }
   vars_prompt:
