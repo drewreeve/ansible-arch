@@ -4,6 +4,7 @@
   roles:
     - { role: base, tags: ['base'] }
     - { role: microcode }
+    - { role: x }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password (only takes effect on creation)"

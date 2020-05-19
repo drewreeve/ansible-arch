@@ -1,0 +1,42 @@
+---
+- name: Install xorg
+  pacman:
+    name: xorg-server
+    state: present
+
+- name: Install xinit
+  pacman:
+    name: xorg-xinit
+    state: present
+
+- name: Install xev
+  pacman:
+    name: xorg-xev
+    state: present
+
+- name: Install xmodmap
+  pacman:
+    name: xorg-xmodmap
+    state: present
+
+- name: Disable mouse acceleration
+  copy:
+    src: 50-mouse-acceleration.conf
+    dest: /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
+
+- name: Lookup graphics adapter
+  shell: 'lspci -k | grep -A 2 -E "(VGA|3D)"'
+  register: vga
+
+- name: Install nvidia drivers
+  pacman:
+    name: nvidia
+    state: present
+  when: "vga.stdout_lines is search('NVIDIA')"
+
+- name: Enable nvidia vsync
+  copy:
+    src: 20-nvidia.conf
+    dest: /etc/X11/xorg.conf.d/20-nvidia.conf
+  when: "vga.stdout_lines is search('NVIDIA')"
+
