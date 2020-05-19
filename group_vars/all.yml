@@ -3,3 +3,15 @@ user:
   groups: wheel
   shell: /usr/bin/zsh
   email: dru.reeve@gmail.com
+
+packages:
+  base:
+    - base-devel
+    - fzf
+    - git
+    - pacman-contrib
+    - reflector
+    - rsync
+    - sudo
+    - tmux
+

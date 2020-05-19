@@ -1,21 +1,33 @@
 ---
-- name: Install sudo
-  pacman: name=sudo state=present
+- name: Install base packages
+  pacman:
+    name: "{{ packages.base }}"
+    state: present
 
-- name: Enable wheel group
-  lineinfile:
-    path: /etc/sudoers.d/01-enable-wheel
-    line: '%wheel ALL=(ALL) ALL'
-    create: yes
-    validate: 'visudo -cf %s'
+- name: Create pacman hook directory
+  file:
+    path: /etc/pacman.d/hooks
+    state: directory
 
-- name: Create new user
-  user:
-    name: "{{ user.name }}"
-    groups: "{{ user.groups }}"
-    password: "{{ user_password|password_hash('sha512') }}"
-    update_password: on_create
-    append: yes
+- name: Copy pacman cache cleanup hook
+  copy:
+    src: paccache.hook
+    dest: /etc/pacman.d/hooks/paccache.hook
+
+- name: Copy reflector.service
+  copy:
+    src: reflector.service
+    dest: /etc/systemd/system/reflector.service
+
+- name: Copy reflector.timer
+  copy:
+    src: reflector.timer
+    dest: /etc/systemd/system/reflector.timer
+
+- name: Enable reflector.timer
+  systemd:
+    name: reflector.timer
+    enabled: yes
 
 - name: Enable colour in pacman
   lineinfile:
@@ -32,4 +44,21 @@
 - name: Install yay
   aur:
     name: yay
+  become: yes
   become_user: "{{ user.name }}"
+
+- name: Enable wheel group
+  lineinfile:
+    path: /etc/sudoers.d/01-enable-wheel
+    line: '%wheel ALL=(ALL) ALL'
+    create: yes
+    validate: 'visudo -cf %s'
+
+
+- name: Create new user
+  user:
+    name: "{{ user.name }}"
+    groups: "{{ user.groups }}"
+    password: "{{ user_password|password_hash('sha512') }}"
+    update_password: on_create
+    append: yes
