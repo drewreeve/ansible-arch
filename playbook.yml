@@ -6,7 +6,7 @@
     - { role: editors }
     - { role: fonts, tags: ['fonts'] }
     - { role: microcode }
-    - { role: x }
+    - { role: xorg }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password (only takes effect on creation)"

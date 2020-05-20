@@ -1,12 +1,9 @@
 ---
 - name: Install xorg
   pacman:
-    name: xorg-server
-    state: present
-
-- name: Install xinit
-  pacman:
-    name: xorg-xinit
+    name:
+      - xorg-server
+      - xorg-xinit
     state: present
 
 - name: Install xev
@@ -17,6 +14,11 @@
 - name: Install xmodmap
   pacman:
     name: xorg-xmodmap
+    state: present
+
+- name: Install xcape
+  pacman:
+    name: xcape
     state: present
 
 - name: Disable mouse acceleration
