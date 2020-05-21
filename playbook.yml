@@ -8,6 +8,7 @@
     - { role: microcode }
     - { role: xorg }
     - { role: i3, tags: ['i3'] }
+    - { role: redshift, tags: ['redshift'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password (only takes effect on creation)"

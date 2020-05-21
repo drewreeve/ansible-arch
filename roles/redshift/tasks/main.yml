@@ -1,0 +1,20 @@
+---
+- name: Install redshift
+  pacman:
+    name: redshift
+    state: present
+
+- name: Enable redshift user service
+  systemd:
+    name: redshift
+    scope: user
+    enabled: yes
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Copy override to fix redshift startup issues
+  copy:
+    src: redshift-override.conf
+    dest: "/home/{{ user.name }}/.config/systemd/user/redshift.service.d/override.conf"
+  become: yes
+  become_user: "{{ user.name }}"
