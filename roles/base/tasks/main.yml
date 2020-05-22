@@ -63,6 +63,8 @@
     update_password: on_create
     append: yes
 
+# Workaround that allows us to later create systemd user services
+
 - name: Get user id
   become: yes
   become_user: "{{ user.name }}"
@@ -71,15 +73,6 @@
 
 - set_fact:
     user_uid={{ user_uid.stdout }}
-
-# Workaround that allows us to later create systemd user services
-- name: Create user socker dir
-  file:
-    path: /run/user/{{ user_uid }}
-    state: directory
-    owner: "{{ user.name }}"
-    group: "{{ user.name }}"
-    mode: 0700
 
 - name: Start user systemd instance
   systemd:
