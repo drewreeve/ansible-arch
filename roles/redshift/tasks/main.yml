@@ -12,6 +12,14 @@
   become: yes
   become_user: "{{ user.name }}"
 
+
+- name: Create directory for service override
+  file:
+    path: "/home/{{ user.name }}/.config/systemd/user/redshift.service.d"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    state: directory
+
 - name: Copy override to fix redshift startup issues
   copy:
     src: redshift-override.conf
