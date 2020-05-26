@@ -1,0 +1,10 @@
+---
+- name: Install chromium
+  pacman:
+    name: chromium
+    state: present
+
+- name: Install firefox
+  pacman:
+    name: firefox
+    state: present
