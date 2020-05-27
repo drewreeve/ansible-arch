@@ -9,6 +9,7 @@
     - { role: xorg }
     - { role: i3, tags: ['i3'] }
     - { role: browsers, tags: ['browsers'] }
+    - { role: media, tags: ['media'] }
     - { role: redshift, tags: ['redshift'] }
   vars_prompt:
     - name: user_password
