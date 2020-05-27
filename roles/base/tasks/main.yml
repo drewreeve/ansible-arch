@@ -54,6 +54,12 @@
     create: yes
     validate: 'visudo -cf %s'
 
+- name: Install zsh
+  pacman:
+    name:
+      - zsh
+      - zsh-autosuggestions
+      - zsh-completions
 
 - name: Create new user
   user:
