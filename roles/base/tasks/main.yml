@@ -41,19 +41,30 @@
     regexp: '^#MAKEFLAGS=\".+\"$'
     line: 'MAKEFLAGS="-j$(nproc)"'
 
-- name: Install yay
-  aur:
-    name: yay
-    skip_installed: yes
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Enable wheel group
+- name: configure wheel group in sudo
   lineinfile:
     path: /etc/sudoers.d/01-enable-wheel
     line: '%wheel ALL=(ALL) ALL'
     create: yes
     validate: 'visudo -cf %s'
+
+- name: Create local user for installing aur packages
+  user:
+    name: makepkg
+    shell: /bin/sh
+  lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: 'makepkg ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+    create: yes
+    validate: 'visudo -cf %s'
+
+- name: Install yay
+  aur:
+    name: yay
+    skip_installed: yes
+  become: yes
+  become_user: makepkg
+
 
 - name: Install additional packages that require no configuration
   pacman:
