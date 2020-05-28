@@ -1,0 +1,26 @@
+---
+- name: Create new user
+  user:
+    name: "{{ user.name }}"
+    groups: "{{ user.groups }}"
+    shell: "{{ user.shell }}"
+    password: "{{ user_password|password_hash('sha512') }}"
+    update_password: on_create
+    append: yes
+
+# Workaround that allows us to later create systemd user services
+
+- name: Get user id
+  become: yes
+  become_user: "{{ user.name }}"
+  command: id -u
+  register: user_uid
+
+- set_fact:
+    user_uid={{ user_uid.stdout }}
+
+- name: Start user systemd instance
+  systemd:
+    name: "user@{{ user_uid }}"
+    state: started
+  notify: stop systemd per-user instance

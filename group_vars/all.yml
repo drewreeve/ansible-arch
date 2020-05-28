@@ -7,8 +7,9 @@ user:
 packages:
   base:
     - base-devel
-    - fzf
-    - git
+    - htop
+    - man-db
+    - man-pages
     - pacman-contrib
     - reflector
     - rsync

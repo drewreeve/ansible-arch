@@ -3,6 +3,7 @@
   become: yes
   roles:
     - { role: base, tags: ['base'] }
+    - { role: user, tags: ['user'] }
     - { role: editors }
     - { role: fonts, tags: ['fonts'] }
     - { role: microcode }
