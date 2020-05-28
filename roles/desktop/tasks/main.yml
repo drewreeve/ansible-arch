@@ -37,7 +37,7 @@
 - name: Install additional desktop utilities from AUR
   aur:
     name: polybar
-    state: present
+    skip_installed: yes
 
 - name: Install gnome theme and icons
   pacman:
