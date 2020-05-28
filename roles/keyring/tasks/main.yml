@@ -1,0 +1,31 @@
+---
+- name: Install keyring
+  pacman:
+    name:
+      - gnome-keyring
+      - seahorse
+    state: present
+
+- name: Append auth rule
+  pamd:
+    name: login
+    type: auth
+    control: include
+    module_path: system-local-login
+    new_type: auth
+    new_control: optional
+    new_module_path: pam_gnome_keyring.so
+    state: after
+
+
+- name: Append session rule
+  pamd:
+    name: login
+    type: session
+    control: include
+    module_path: system-local-login
+    new_type: session
+    new_control: optional
+    new_module_path: pam_gnome_keyring.so
+    module_arguments: auto_start
+    state: after

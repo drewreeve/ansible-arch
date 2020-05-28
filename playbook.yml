@@ -9,6 +9,7 @@
     - { role: microcode }
     - { role: xorg }
     - { role: desktop, tags: ['desktop'] }
+    - { role: keyring, tags: ['keyring'] }
     - { role: browsers, tags: ['browsers'] }
     - { role: media, tags: ['media'] }
     - { role: redshift, tags: ['redshift'] }
