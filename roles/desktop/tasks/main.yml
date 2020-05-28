@@ -32,6 +32,12 @@
       - gvfs-smb
       - pcmanfm
       - rofi
+    state: present
+
+- name: Install additional desktop utilities from AUR
+  aur:
+    name: polybar
+    state: present
 
 - name: Install gnome theme and icons
   pacman:
