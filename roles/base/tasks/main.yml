@@ -44,6 +44,7 @@
 - name: Install yay
   aur:
     name: yay
+    state: present
   become: yes
   become_user: "{{ user.name }}"
 
