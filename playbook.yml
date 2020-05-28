@@ -8,7 +8,7 @@
     - { role: fonts, tags: ['fonts'] }
     - { role: microcode }
     - { role: xorg }
-    - { role: i3, tags: ['i3'] }
+    - { role: desktop, tags: ['desktop'] }
     - { role: browsers, tags: ['browsers'] }
     - { role: media, tags: ['media'] }
     - { role: redshift, tags: ['redshift'] }

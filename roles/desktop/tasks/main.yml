@@ -23,3 +23,18 @@
   systemd:
     name: "suspend@{{ user.name }}"
     enabled: yes
+
+- name: Install additional desktop utilities
+  pacman:
+    name:
+      - alacritty
+      - dunst
+      - gvfs-smb
+      - pcmanfm
+      - rofi
+
+- name: Install gnome theme and icons
+  pacman:
+    name:
+      - materia-gtk-theme
+      - papirus-icon-theme
