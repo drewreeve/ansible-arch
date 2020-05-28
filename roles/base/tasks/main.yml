@@ -52,6 +52,8 @@
   user:
     name: makepkg
     shell: /bin/sh
+
+- name: Set NOPASSWD for makepkg user
   lineinfile:
     path: /etc/sudoers.d/11-install-aur_builder
     line: 'makepkg ALL=(ALL) NOPASSWD: /usr/bin/pacman'
