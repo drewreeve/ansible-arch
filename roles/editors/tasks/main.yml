@@ -3,3 +3,8 @@
   pacman:
     name: "{{ packages.editors }}"
     state: present
+
+- name: Install dictionary
+  pacman:
+    name: hunspell-en_GB
+    state: present
