@@ -6,7 +6,7 @@
     - { role: user, tags: ['user'] }
     - { role: editors }
     - { role: fonts, tags: ['fonts'] }
-    - { role: microcode }
+    - { role: systemd-boot, tags: ['systemd-boot'] }
     - { role: xorg }
     - { role: desktop, tags: ['desktop'] }
     - { role: keyring, tags: ['keyring'] }

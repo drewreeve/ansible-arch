@@ -25,3 +25,8 @@
     insertbefore: ^initrd
     line: initrd /amd-ucode.img
   when: "'AuthenticAMD' in ansible_processor"
+
+- name: Copy pacman hook to regenerate systemd-boot install
+  copy:
+    src: 100-systemd-boot.hook
+    dest: /etc/pacman.d/hooks/100-systemd-boot.hook
