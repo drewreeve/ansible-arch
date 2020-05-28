@@ -38,6 +38,8 @@
   aur:
     name: polybar
     skip_installed: yes
+  become: yes
+  become_user: "{{ user.name }}"
 
 - name: Install gnome theme and icons
   pacman:
