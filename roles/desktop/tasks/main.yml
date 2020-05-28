@@ -32,6 +32,7 @@
       - gvfs-smb
       - pcmanfm
       - rofi
+      - scrot
     state: present
 
 - name: Install additional desktop utilities from AUR
