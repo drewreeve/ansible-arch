@@ -1,0 +1,8 @@
+---
+- name: Install PulseAudio
+  pacman:
+    name:
+      - pulseaudio
+      - pulseaudio-alsa
+      - pavucontrol
+    state: present

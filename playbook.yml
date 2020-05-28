@@ -8,6 +8,7 @@
     - { role: fonts, tags: ['fonts'] }
     - { role: systemd-boot, tags: ['systemd-boot'] }
     - { role: xorg }
+    - { role: sound }, tags: ['sound'] }
     - { role: desktop, tags: ['desktop'] }
     - { role: keyring, tags: ['keyring'] }
     - { role: browsers, tags: ['browsers'] }
