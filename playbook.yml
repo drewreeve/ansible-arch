@@ -7,6 +7,7 @@
     - { role: editors }
     - { role: fonts, tags: ['fonts'] }
     - { role: systemd-boot, tags: ['systemd-boot'] }
+    - { role: ntp, tags: ['ntp'] }
     - { role: xorg }
     - { role: sound, tags: ['sound'] }
     - { role: desktop, tags: ['desktop'] }
