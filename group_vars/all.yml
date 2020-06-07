@@ -19,10 +19,14 @@ packages:
     - neovim
     - vim
   fonts:
+    - cantarell-fonts
+    - gsfonts
+    - noto-fonts
     - noto-fonts-emoji
     - ttf-caladea
     - ttf-carlito
     - ttf-croscore
     - ttf-ibm-plex
     - ttf-liberation
+    - ttf-opensans
     - ttf-roboto
