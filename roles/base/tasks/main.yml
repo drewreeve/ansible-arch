@@ -84,3 +84,7 @@
       - zsh-autosuggestions
       - zsh-completions
 
+- name: Enable fstrim timer
+  systemd:
+    name: fstrim.timer
+    enabled: yes
