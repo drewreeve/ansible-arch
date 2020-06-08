@@ -15,6 +15,7 @@
     - { role: browsers, tags: ['browsers'] }
     - { role: media, tags: ['media'] }
     - { role: redshift, tags: ['redshift'] }
+    - { role: dotfiles, tags: ['dotfiles'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password (only takes effect on creation)"

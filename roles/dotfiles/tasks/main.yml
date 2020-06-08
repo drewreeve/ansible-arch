@@ -1,0 +1,25 @@
+---
+- name: Install stow
+  pacman:
+    name: stow
+    state: present
+
+- stat: path=~{{ user.name }}/.dotfiles
+  register: dotfiles_dir
+
+- name: Clone dotfiles
+  become: yes
+  become_user: "{{ user.name }}"
+  git:
+    repo: "git://github.com/drewreeve/dotfiles.git"
+    dest: "~{{ user.name }}/.dotfiles"
+    update: no
+  register: dotfiles_cloned
+  when: not dotfiles_dir.stat.exists
+
+- name: Install dotfiles
+  become: yes
+  become_user: "{{ user.name }}"
+  command: ./install
+  args:
+    chdir: "~{{ user.name }}/.dotfiles"
