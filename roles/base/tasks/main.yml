@@ -76,6 +76,8 @@
       - fd
       - fzf
       - git
+      - pcmanfm
+      - ranger
       - ripgrep
       - shellcheck
       - unzip
