@@ -85,6 +85,7 @@
       - zsh
       - zsh-autosuggestions
       - zsh-completions
+      - zsh-syntax-highlighting
 
 - name: Enable fstrim timer
   systemd:

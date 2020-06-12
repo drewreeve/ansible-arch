@@ -4,6 +4,11 @@
     name: i3-gaps
     state: present
 
+- name: Install picom
+  pacman:
+    name: picom
+    state: present
+
 - name: Install i3lock
   pacman:
     name: i3lock

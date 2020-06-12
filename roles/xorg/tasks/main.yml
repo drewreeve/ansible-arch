@@ -4,6 +4,7 @@
     name:
       - xorg-server
       - xorg-xinit
+      - xorg-xdpyinfo
     state: present
 
 - name: Install xev
