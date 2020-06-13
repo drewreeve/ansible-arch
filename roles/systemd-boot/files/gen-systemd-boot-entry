@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+kernel=$1
+
+root_partition=$(df --output=source / | tail -n1)
+
+if [[ $root_partition == /dev/mapper/* ]]; then
+  root_partition=/dev/$(dmsetup deps -o devname | awk -F'[()]' '{ print $(NF - 1) }')
+  encrypted_root_uuid=$(cryptsetup luksUUID "$root_partition")
+  root_crypt_device=$(mount|grep ' / '|cut -d' ' -f 1)
+
+  options="cryptdevice=UUID=$encrypted_root_uuid:luks:allow-discards root=$root_crypt_device rd.luks.options=discard rw"
+fi
+
+cpu=$( grep 'vendor_id' < /proc/cpuinfo | uniq)
+
+if [[ $cpu == *'GenuineIntel'* ]]; then
+  ucode=intel-ucode.img
+else
+  ucode=amd-ucode.img
+fi
+
+modesetting=''
+# check for nvidia graphics
+if [[ $(lspci -k | grep -A 2 -E "(VGA|3D)") == *'NVIDIA'* ]]; then
+  modesetting='nvidia-drm.modeset=1'
+fi
+
+initrd_file=/initramfs-$kernel.img
+kernel_file=/vmlinuz-$kernel
+ucode_file=/$ucode
+
+# Check everything exists to avoid breaking anything
+for file in $initrd_file $kernel_file $ucode_file; do
+  if ! [[ -f /boot/$file ]]; then
+    printf 'FATAL: %s does not exist\n' "$file"
+    exit 1
+  fi
+done
+
+cat << EOF
+title Arch Linux
+linux $kernel_file
+initrd $ucode_file
+initrd $initrd_file
+options $options $modesetting
+EOF

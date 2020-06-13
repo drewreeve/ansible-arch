@@ -5,28 +5,30 @@
     state: present
   when: "'GenuineIntel' in ansible_processor"
 
-- name: Load intel microcode
-  lineinfile:
-    path: /boot/loader/entries/arch.conf
-    insertbefore: ^initrd
-    line: initrd /intel-ucode.img
-  when: "'GenuineIntel' in ansible_processor"
-
-
 - name: Install amd microcode
   pacman:
     name: amd-ucode
     state: present
   when: "'AuthenticAMD' in ansible_processor"
 
-- name: Load amd microcode
-  lineinfile:
-    path: /boot/loader/entries/arch.conf
-    insertbefore: ^initrd
-    line: initrd /amd-ucode.img
-  when: "'AuthenticAMD' in ansible_processor"
-
 - name: Copy pacman hook to regenerate systemd-boot install
   copy:
     src: 100-systemd-boot.hook
     dest: /etc/pacman.d/hooks/100-systemd-boot.hook
+
+- name: Copy generate boot entry script
+  copy:
+    src: gen-systemd-boot-entry
+    dest: /usr/local/bin/gen-systemd-boot-entry
+    mode: '755'
+
+- name: Generate boot entry
+  command: gen-systemd-boot-entry {{ kernel }}
+  register: boot_entry
+  changed_when: false
+
+- name: Copy boot entry
+  copy:
+    content: "{{ boot_entry.stdout }}"
+    dest: /boot/loader/entries/arch.conf
+
